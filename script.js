@@ -1,32 +1,31 @@
+ (28 sloc)  726 Bytes
+ 
+
 function threeSum(arr, target) {
   //your code here
-	var threeSumClosest = function (nums, target) {
-    // Sort the array
-    nums.sort((a, b) => a - b);
-    // Length of the array
-    const n = nums.length;
-    // Result
-    let closest = nums[0] + nums[1] + nums[n - 1];
-    // Loop for each element of the array
-    for (let i = 0; i < n - 2; i++) {
-        // Left and right pointers
-        let j = i + 1;
-        let k = n - 1;
-        // Loop for all other pairs
-        while (j < k) {
-            let sum = nums[i] + nums[j] + nums[k];
-            if (sum <= target) {
-                j++;
-            } else {
-                k--;
-            }
-            if (Math.abs(closest - target) > Math.abs(sum - target)) {
-                closest = sum;
-            }
-        }
+  arr.sort(function (a, b) {
+    return a - b;
+  });
+  let i, j, k;
+  let nearest_target = 0,
+    least_diff = Number.MAX_VALUE;
+  for (i = 0; i < arr.length - 2; i++) {
+    j = i + 1;
+    k = arr.length - 1;
+    while (j < k) {
+      let sum = Number(arr[i]) + Number(arr[j]) + Number(arr[k]);
+      let diff = Math.abs(sum - target);
+      if (diff < least_diff) {
+        least_diff = diff;
+        nearest_target = sum;
+      }
+      if (sum == target) return nearest_target;
+      else if (sum > target) k--;
+      else j++;
     }
-    return closest;
-};
+  }
+  return nearest_target;
 }
-
+// let arr=['1','2','-4','-1'],target=1;
+// console.log(threeSum(arr, target));
 module.exports = threeSum;

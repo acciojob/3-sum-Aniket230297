@@ -1,5 +1,3 @@
- (28 sloc)  726 Bytes
- 
 
 function threeSum(arr, target) {
   //your code here
